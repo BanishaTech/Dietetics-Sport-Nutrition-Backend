@@ -2,14 +2,26 @@ const cors = require('cors');
 const express = require('express');
 const app = express ();
 const port = 1500;
-const port2 = 3000;
+
 class Post {
-    constructor(title, description, image) {
+    constructor(title, description, image, id) {
         this.title = title;
         this.description = description;
         this.image = image || "https://picsum.photos/200"; // Imagen por defecto si no se proporciona
+        this.id = id;
     }
 }
+
+class PostDetail {
+    constructor(id, title, image, description, content) {
+        this.id = id;
+        this.title = title;
+        this.image = image;
+        this.description = description;
+        this.content = content; // HTML 
+    }
+}
+
 
 app.use(cors()) // This is for avoid cors error.
 app.get('/dieteticsPosts', (request, response) => {
@@ -25,22 +37,18 @@ app.get('/dieteticsPosts', (request, response) => {
 response.json(posts)
 });
 
-app.listen(port,() => {
-
-});
-
-
 app.get('/dieteticsPostsDetail', (request, response) => {
-    const posts = [
-        new Post("Control of disease", "Heart attack disease", "Mental health disease", "morbid obesity"),
-        new Post("The diet of mediterranean", "Eating healthy food like a salads, pieces of meat with vegetables"),
-        new Post("Sport", "running", "body combat","dancing", "swimming"),
-        new Post("Coaching personal", "advise and consult with the individual to strengthen her/his life skills and help her/him reach her/his full potential.")
-    ];
+    const id = request.query.id
+    
+    if (id == null) {
+        return response.status(401).json();
+    }
 
-    response.json(posts);
+    const postDetail = new PostDetail(1, "Titulo", "https://imagen.com","description related", "<div>Hola Hola</div>")
+
+    response.json(postDetail);
 });
 
-app.listen(port2, () => {
+app.listen(port, () => {
    
 });
