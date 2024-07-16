@@ -280,11 +280,9 @@ app.get('/search', (request, response) => {
     }
     console.log(questionRequested);
 
-    const filteredPosts = postDetailList.find(item => item.question == questionRequested);
+    const filteredPosts = posts.find(item => item.title.includes(questionRequested));
 
     response.json(filteredPosts);
-
-
 });
 
 
