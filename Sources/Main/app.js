@@ -33,9 +33,9 @@ const posts = [
         2),
     new Post("Sports and Wellness",
         "Discover how sports can improve your physical and mental well-being. Find the sport that best suits you and start transforming your life.",
-        "https://images.pexels.com/photos/1585745/pexels-photo-1585745.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        "https://thumbs.dreamstime.com/z/woman-doing-various-sport-exercise-set-training-gym-fitness-activity-woman-doing-various-sport-exercise-set-training-167141099.jpg",
         3),
-    new Post( "Emotional Coaching for Athletes",
+    new Post("Emotional Coaching for Athletes",
         "Improve your athletic performance through emotional coaching. Learn to manage your emotions and maintain a positive mindset to achieve your goals.",
         "https://images.pexels.com/photos/3763879/pexels-photo-3763879.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
         4),
@@ -50,7 +50,7 @@ const postDetailList = [
         `<div class="container">
             <h1>Fresh Energy</h1>
             <p>Refresh your sports diet with fruits and vegetables for a summer full of energy.</p>
-            <img src="https://via.placeholder.com/800x400.png?text=Fruits+and+Vegetables" alt="Fruits and Vegetables">
+            <img src="https://www.thetimes.com/imageserver/image/%2Fmethode%2Ftimes%2Fprod%2Fweb%2Fbin%2F049f79b0-ef5d-11ed-b02d-cefaa3091195.jpg?crop=1600%2C900%2C0%2C0&resize=1200" alt="Fruits and Vegetables">
             
             <h2>Recommended Ingredients</h2>
             <ul>
@@ -103,7 +103,7 @@ const postDetailList = [
         `<div class="container">
             <h1>Dietetics and Sports Nutrition</h1>
             <p>Optimize your athletic performance with proper nutrition. Learn about essential nutrients and how to incorporate them into your daily diet to reach your goals.</p>
-            <img src="https://via.placeholder.com/800x400.png?text=Sports+Nutrition" alt="Sports Nutrition">
+            <img src="https://www.sheilakealey.com/wp-content/uploads/2014/05/OverallNutrition-1024x694.jpg" alt="Sports Nutrition">
             
             <h2>Essential Nutrients</h2>
             <ul>
@@ -151,12 +151,12 @@ const postDetailList = [
     new PostDetail(
         3,
         "Sports and Wellness",
-       "https://images.pexels.com/photos/1585745/pexels-photo-1585745.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        "https://thumbs.dreamstime.com/z/woman-doing-various-sport-exercise-set-training-gym-fitness-activity-woman-doing-various-sport-exercise-set-training-167141099.jpg",
         "Discover how sports can improve your physical and mental well-being. Find the sport that best suits you and start transforming your life.",
         `<div class="container">
             <h1>Sports and Wellness</h1>
             <p>Discover how sports can improve your physical and mental well-being. Find the sport that best suits you and start transforming your life.</p>
-            <img src="https://via.placeholder.com/800x400.png?text=Sports+and+Wellness" alt="Sports and Wellness">
+            <img src="https://img.freepik.com/premium-vector/athletic-people-performing-sports-activity-training-exercising-sport-workout_605858-1092.jpg" alt="Sports and Wellness">
             
             <h2>Sports Activities</h2>
             <ul>
@@ -200,14 +200,14 @@ const postDetailList = [
             </table>
         </div>`
     ),
-    new PostDetail(4, 
+    new PostDetail(4,
         "Emotional Coaching for Athletes",
         "https://images.pexels.com/photos/3763879/pexels-photo-3763879.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
         "Improve your athletic performance through emotional coaching. Learn to manage your emotions and maintain a positive mindset to achieve your goals.",
         `<div class="container">
             <h1>Emotional Coaching for Athletes</h1>
             <p>Improve your athletic performance through emotional coaching. Learn to manage your emotions and maintain a positive mindset to achieve your goals.</p>
-            <img src="https://via.placeholder.com/800x400.png?text=Emotional+Coaching" alt="Emotional Coaching">
+            <img src="i&ved=0CA0QxiAoBWoXChMI0PWAgcuuhwMVAAAAAB0AAAAAEA8" alt="Emotional Coaching">
             
             <h2>Key Aspects of Emotional Coaching</h2>
             <ul>
@@ -275,12 +275,12 @@ app.get('/dieteticsPostsDetail', (request, response) => {
 app.get('/search', (request, response) => {
     const questionRequested = request.query.question;
 
-    if(questionRequested == null) {
+    if (questionRequested == null) {
         return response.status(400).json();
     }
     console.log(questionRequested);
 
-    const filteredPosts = posts.find(item => item.title.includes(questionRequested));
+    const filteredPosts = posts.filter(item => item.title.toLowerCase().includes(questionRequested.toLowerCase()));
 
     response.json(filteredPosts);
 });
