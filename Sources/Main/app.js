@@ -50,7 +50,7 @@ const postDetailList = [
         `<div class="container">
             <h1>Fresh Energy</h1>
             <p>Refresh your sports diet with fruits and vegetables for a summer full of energy.</p>
-            <img src="https://www.thetimes.com/imageserver/image/%2Fmethode%2Ftimes%2Fprod%2Fweb%2Fbin%2F049f79b0-ef5d-11ed-b02d-cefaa3091195.jpg?crop=1600%2C900%2C0%2C0&resize=1200" alt="Fruits and Vegetables">
+            <img class="detailPicture" src="https://www.thetimes.com/imageserver/image/%2Fmethode%2Ftimes%2Fprod%2Fweb%2Fbin%2F049f79b0-ef5d-11ed-b02d-cefaa3091195.jpg?crop=1600%2C900%2C0%2C0&resize=1200" alt="Fruits and Vegetables">
             
             <h2>Recommended Ingredients</h2>
             <ul>
@@ -103,7 +103,7 @@ const postDetailList = [
         `<div class="container">
             <h1>Dietetics and Sports Nutrition</h1>
             <p>Optimize your athletic performance with proper nutrition. Learn about essential nutrients and how to incorporate them into your daily diet to reach your goals.</p>
-            <img src="https://www.sheilakealey.com/wp-content/uploads/2014/05/OverallNutrition-1024x694.jpg" alt="Sports Nutrition">
+            <img class="detailPicture" src="https://www.sheilakealey.com/wp-content/uploads/2014/05/OverallNutrition-1024x694.jpg" alt="Sports Nutrition">
             
             <h2>Essential Nutrients</h2>
             <ul>
@@ -156,7 +156,7 @@ const postDetailList = [
         `<div class="container">
             <h1>Sports and Wellness</h1>
             <p>Discover how sports can improve your physical and mental well-being. Find the sport that best suits you and start transforming your life.</p>
-            <img src="https://img.freepik.com/premium-vector/athletic-people-performing-sports-activity-training-exercising-sport-workout_605858-1092.jpg" alt="Sports and Wellness">
+            <img class="detailPicture" src="https://img.freepik.com/premium-vector/athletic-people-performing-sports-activity-training-exercising-sport-workout_605858-1092.jpg" alt="Sports and Wellness">
             
             <h2>Sports Activities</h2>
             <ul>
@@ -207,7 +207,7 @@ const postDetailList = [
         `<div class="container">
             <h1>Emotional Coaching for Athletes</h1>
             <p>Improve your athletic performance through emotional coaching. Learn to manage your emotions and maintain a positive mindset to achieve your goals.</p>
-            <img src="i&ved=0CA0QxiAoBWoXChMI0PWAgcuuhwMVAAAAAB0AAAAAEA8" alt="Emotional Coaching">
+            <img class="detailPicture" src="https://images.pexels.com/photos/2228741/pexels-photo-2228741.jpeg" alt="Athletics">
             
             <h2>Key Aspects of Emotional Coaching</h2>
             <ul>
@@ -279,8 +279,16 @@ app.get('/search', (request, response) => {
         return response.status(400).json();
     }
     console.log(questionRequested);
-
-    const filteredPosts = posts.filter(item => item.title.toLowerCase().includes(questionRequested.toLowerCase()));
+    // fresh diet in summer
+    const questionKeywords = questionRequested.split(" "); // -> ["fresh", "diet", "in", "summer""]
+    const filteredPosts = posts.filter(item => {
+    // Emotional Coaching for Athletes
+    for(let i = 0; i < questionKeywords.length; i++) 
+        // Emotional Coaching for Athletes // i=2 "in"
+        if (item.title.toLowerCase().includes(questionKeywords[i].toLowerCase())) {
+            return item;
+        }
+    });
 
     response.json(filteredPosts);
 });
